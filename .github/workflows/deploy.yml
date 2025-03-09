@@ -1,0 +1,8 @@
+name: Deploy to AWS
+on: [push]
+jobs:
+  deploy-job-Job:
+    runs-on:
+      - codebuild-game-website-build-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - run: echo "Deploy Done"
