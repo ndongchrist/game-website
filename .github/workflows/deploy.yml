@@ -1,8 +1,17 @@
 name: Deploy to AWS
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   deploy-job:
-    runs-on:
-      - codebuild-game-website-build-${{ github.run_id }}-${{ github.run_attempt }}
+    runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploy Done"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Trigger AWS CodeBuild
+        run: |
+          aws codebuild start-build --project-name game-website-build 
